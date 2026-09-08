@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자주 묻는 질문 | 한우리 독서토론논술 파주운정</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #FF7F50;
+      --orange-deep: #E8623A;
+      --orange-light:#FFF0EA;
+      --ink:         #1E2B3A;
+      --muted:       #6B7280;
+      --gray-border: #e5e7eb;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--ink);
+      background: #f9fafb;
+      word-break: keep-all;
+      line-height: 1.7;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      background: var(--orange);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(255,255,255,.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .header-inner {
+      position: relative;
+      max-width: 800px; margin: 0 auto;
+      padding: 28px 24px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.2); color: var(--white);
+      font-size: .8rem; font-weight: 600;
+      padding: 7px 14px; border-radius: 999px;
+      text-decoration: none; white-space: nowrap;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .back-btn:hover { background: rgba(255,255,255,.35); }
+    .header-text h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; }
+    .header-text p  { font-size: .8rem; color: rgba(255,255,255,.75); margin-top: 2px; }
+
+    /* ── 본문 ── */
+    main {
+      max-width: 800px; margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .page-intro {
+      background: var(--orange-light);
+      border: 1px solid rgba(255,127,80,.2);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .page-intro p { font-size: .875rem; color: var(--orange-deep); font-weight: 600; line-height: 1.6; }
+
+    /* ── 아코디언 ── */
+    .qna-item {
+      background: var(--white);
+      border: 1px solid var(--gray-border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      transition: box-shadow .2s;
+    }
+    .qna-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+
+    .qna-question {
+      width: 100%; text-align: left;
+      background: none; border: none; cursor: pointer;
+      padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .q-badge {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      background: var(--orange); color: var(--white);
+      font-size: .75rem; font-weight: 800;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .q-text {
+      flex: 1;
+      font-size: .95rem; font-weight: 600;
+      color: var(--ink); line-height: 1.55;
+      text-align: left;
+    }
+    .q-arrow {
+      flex-shrink: 0;
+      font-size: .75rem; color: var(--muted);
+      margin-top: 4px;
+      transition: transform .25s;
+    }
+    .qna-item.open .q-arrow { transform: rotate(180deg); }
+
+    .qna-answer {
+      display: none;
+      padding: 0 24px 22px 64px;
+    }
+    .qna-item.open .qna-answer { display: block; }
+
+    .a-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px;
+      background: var(--orange-light); color: var(--orange-deep);
+      font-size: .75rem; font-weight: 800;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      float: left; margin-right: 12px; margin-top: 2px;
+    }
+    .a-text {
+      font-size: .875rem; color: var(--muted);
+      line-height: 1.85; overflow: hidden;
+    }
+
+    /* ── 상담 CTA ── */
+    .cta-strip {
+      margin-top: 40px;
+      background: var(--orange-light);
+      border: 1px solid rgba(255,127,80,.2);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .cta-strip p { font-size: .9rem; color: var(--ink); margin-bottom: 16px; font-weight: 500; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: var(--white);
+      font-size: .95rem; font-weight: 700;
+      padding: 14px 32px; border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(255,127,80,.3);
+      transition: background .2s, transform .2s;
+    }
+    .cta-btn:hover { background: var(--orange-deep); transform: translateY(-2px); }
+
+    /* ── 푸터 ── */
+    footer {
+      background: var(--ink); color: #8A9AB0;
+      text-align: center; padding: 24px 20px;
+      font-size: .8rem; line-height: 1.7;
+    }
+    footer p.addr { font-size: .72rem; color: #4A5A6A; margin-top: 4px; }
+
+    @media (max-width: 600px) {
+      .header-inner { padding: 20px 16px 18px; }
+      .header-text h1 { font-size: 1.1rem; }
+      main { padding: 24px 16px 60px; }
+      .qna-question { padding: 16px 18px; }
+      .qna-answer { padding: 0 18px 18px 58px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>자주 묻는 질문</h1>
+      <p>한우리 독서토론논술 파주운정 산내푸르지오</p>
+    </div>
+    <a href="index.html" class="back-btn">← 홈으로</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-intro">
+    <p>교습소에 대해 궁금하신 점을 모았습니다.<br>더 궁금한 사항은 카카오톡으로 편하게 문의해 주세요.</p>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qna-item" onclick="toggle(this)">
+    <button class="qna-question">
+      <span class="q-badge">Q</span>
+      <span class="q-text">귀 사의 설립 취지를 말씀해 주십시오.</span>
+      <span class="q-arrow">▼</span>
+    </button>
+    <div class="qna-answer">
+      <span class="a-badge">A</span>
+      <div class="a-text">
+        제 아이가 초등학교에 입학하면서 학교 독서 지원단과 책 읽어주기 어머니 봉사활동을 시작하게 되었습니다. 아이들에게 책을 읽어주며 제 이야기에 귀 기울이고 몰입하는 모습을 볼 때마다 큰 행복과 보람을 느꼈고, 자연스럽게 독서 교육에 관심을 갖게 되었습니다.
+        <br><br>
+        처음에는 제 아이를 잘 키우고 싶은 마음에서 출발했지만, 아이들과 책을 함께 읽는 시간이 쌓이면서 우리 지역의 더 많은 아이에게 올바른 독서 방법과 토론의 즐거움을 전하고 싶다는 생각이 커졌습니다. 그 마음을 바탕으로 지금의 한우리독서토론논술 교습소를 설립하게 되었습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 — 추가 예시 (내용 채워넣으세요) -->
+  <div class="qna-item" onclick="toggle(this)">
+    <button class="qna-question">
+      <span class="q-badge">Q</span>
+      <span class="q-text">수업은 어떤 방식으로 진행되나요?</span>
+      <span class="q-arrow">▼</span>
+    </button>
+    <div class="qna-answer">
+      <span class="a-badge">A</span>
+      <div class="a-text">
+        내용을 입력해 주세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="qna-item" onclick="toggle(this)">
+    <button class="qna-question">
+      <span class="q-badge">Q</span>
+      <span class="q-text">수강 대상 연령은 어떻게 되나요?</span>
+      <span class="q-arrow">▼</span>
+    </button>
+    <div class="qna-answer">
+      <span class="a-badge">A</span>
+      <div class="a-text">
+        내용을 입력해 주세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="qna-item" onclick="toggle(this)">
+    <button class="qna-question">
+      <span class="q-badge">Q</span>
+      <span class="q-text">수업료 및 교재비는 어떻게 되나요?</span>
+      <span class="q-arrow">▼</span>
+    </button>
+    <div class="qna-answer">
+      <span class="a-badge">A</span>
+      <div class="a-text">
+        내용을 입력해 주세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="qna-item" onclick="toggle(this)">
+    <button class="qna-question">
+      <span class="q-badge">Q</span>
+      <span class="q-text">체험 수업이나 상담은 어떻게 신청하나요?</span>
+      <span class="q-arrow">▼</span>
+    </button>
+    <div class="qna-answer">
+      <span class="a-badge">A</span>
+      <div class="a-text">
+        내용을 입력해 주세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <p>더 궁금하신 점이 있으신가요?<br>카카오톡으로 편하게 문의해 주세요.</p>
+    <a href="http://pf.kakao.com/_xxxxxx" target="_blank" class="cta-btn">💬 카카오톡 1:1 상담하기</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 한우리 독서토론논술 파주운정 산내푸르지오독서교실. All rights reserved.</p>
+  <p class="addr">경기 파주시 심학산로 385 운정신도시센트럴푸르지오 상가 2동 204호</p>
+</footer>
+
+<script>
+  function toggle(item) {
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
