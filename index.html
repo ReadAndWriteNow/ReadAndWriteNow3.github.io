@@ -141,12 +141,13 @@
     .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
     .card p  { font-size: .875rem; color: var(--muted); line-height: 1.75; }
     .card .detail { font-size: .75rem; font-weight: 700; color: var(--orange-deep); margin-top: 12px; }
-    .card:hover { transform: translateY(-3px); transition: transform .25s; }
+    .card { transition: transform .25s ease, box-shadow .25s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
 
     /* ── about 그리드 ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .about-photo { border-radius: 16px; overflow: hidden; background: var(--orange-light); aspect-ratio: 4/3; }
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+    .about-photo { border-radius: 16px; overflow: hidden; background: var(--orange-light); height: 100%; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
     .bullet-list { list-style: none; margin-top: 12px; }
     .bullet-list li {
@@ -176,8 +177,8 @@
     /* ── 시설 그리드 ── */
     .facility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .facility-photo { border-radius: 16px; overflow: hidden; background: var(--gray-100); aspect-ratio: 4/3; }
-    .facility-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-    .facility-photo:hover img { transform: scale(1.05); }
+    .facility-photo img, .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
+    .facility-photo:hover img, .about-photo:hover img { transform: scale(1.05); }
     .facility-caption { text-align: center; font-size: .8rem; color: var(--muted); margin-top: 12px; }
 
     /* ── 운영 안내 ── */
@@ -308,13 +309,13 @@
       <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">원장 이해옥</p>
       <ul class="bullet-list">
         <li>독서토론논술 교습소 운영 (10년 경력)</li>
-        <li>유아교육전공</li>
+        <li>해법·한우리 독서토론교습소 운영</li>
         <li>독서지도사 자격 보유</li>
       </ul>
     </div>
-    <div class="introduce">
-    <img src="introduce.jpg" alt="아이들의 활동 모습" />
-</div>
+    <div class="about-photo">
+      <img src="introduce-1.jpg" alt="원장 소개" style="object-position: center center;" />
+    </div>
   </div>
 
   <div class="philosophy-box">
@@ -350,7 +351,9 @@
       <p>비문학 읽기 및 신문 칼럼 분석. 서술형 평가 대비 및 중등 내신 연계형 심화 논술 작성.</p>
       <p class="detail">✦ 내신 성적 향상 집중 지도</p>
     </div>
-    div class="facility-grid" style="margin-top:24px;">
+  </div>
+
+  <div class="facility-grid" style="margin-top:24px;">
     <div class="facility-photo">
       <img src="curriculum1.jpg" alt="수업 모습 1" />
     </div>
@@ -476,3 +479,4 @@
 
 </body>
 </html>
+
